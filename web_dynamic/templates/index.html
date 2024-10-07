@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainTease Quiz (jQuery Version)</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="quiz-container">
+        <h2 id="question"></h2>
+        <ul id="answers"></ul>
+        <button id="next-btn">Next Question</button>
+    </div>
+
+    <script>
+        let questions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Fetch questions from Open Trivia API using jQuery
+        function fetchQuestions() {
+            return $.getJSON('https://opentdb.com/api.php?amount=10&category=9&type=multiple')
+                .then(data => data.results);
+        }
+
+        // Load the questions into the app
+        function loadQuestions() {
+            fetchQuestions().then(data => {
+                questions = data;
+                renderQuestion(0);
+            });
+        }
+
+        // Render the current question and answers
+        function renderQuestion(index) {
+            const question = questions[index].question;
+            const correctAnswer = questions[index].correct_answer;
+            const incorrectAnswers = questions[index].incorrect_answers;
+            const allAnswers = [...incorrectAnswers, correctAnswer].sort(() => Math.random() - 0.5);
+
+            // Use jQuery to update the DOM
+            $('#question').html(question);
+            $('#answers').empty(); // Clear previous answers
+
+            // Dynamically create radio buttons for each answer
+            $.each(allAnswers, function (i, answer) {
+                $('#answers').append(`
+                    <li>
+                        <input type="radio" name="answer" value="${answer}"> ${answer}
+                    </li>
+                `);
+            });
+        }
+
+        // Handle next question logic
+        function nextQuestion() {
+            const selectedAnswer = $('input[name="answer"]:checked').val();
+
+            if (!selectedAnswer) {
+                alert('Please select an answer!');
+                return;
+            }
+
+            const correctAnswer = questions[currentQuestionIndex].correct_answer;
+
+            // Check if the user's answer is correct
+            if (selectedAnswer === correctAnswer) {
+                score++;
+                alert('Correct!');
+            } else {
+                alert(`Wrong! The correct answer was: ${correctAnswer}`);
+            }
+
+            // Move to the next question or end the quiz
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                renderQuestion(currentQuestionIndex);
+            } else {
+                alert(`Quiz completed! Your score is ${score} out of ${questions.length}`);
+            }
+        }
+
+        // When the page is ready, load questions
+        $(document).ready(function () {
+            loadQuestions();
+
+            // Attach event listener for the Next button
+            $('#next-btn').click(nextQuestion);
+        });
+    </script>
+</body>
+</html>
+
