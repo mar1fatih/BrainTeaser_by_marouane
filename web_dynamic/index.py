@@ -9,8 +9,21 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def home():
-    """ main page """
-    return render_template('index.html')
+    """ main page """ 
+    leaders = requests.get('/leaders')
+    if leaders.status_code == 200:
+        return render_template('index.html', leaders=leaders['leaders'])
+    return render_template('index.html', leaders={})
+
+@app.route('/users/<string:username>', methods=['GET'], strict_slashes=False)
+def quiz(username):
+    """main quiz page"""
+    return render_template('quiz.html')
+
+@app.route('/results/<string:username>', methods=['GET'], strict_slashes=False)
+def quiz_results(username):
+    """final results"""
+    return render_template('results.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5003')
