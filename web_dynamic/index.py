@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route('/', strict_slashes=False)
 def home():
     """ main page """ 
-    leaders = requests.get('/leaders')
+    leaders = requests.get('127.0.0.0:5000/leaders')
     if leaders.status_code == 200:
         return render_template('index.html', leaders=leaders['leaders'])
     return render_template('index.html', leaders={})

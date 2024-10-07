@@ -43,3 +43,5 @@ class PlayersController {
     res.status(200).json({ leaders });
   }
 }
+
+module.exports = PlayersController;
