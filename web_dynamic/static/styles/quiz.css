@@ -6,7 +6,7 @@ body {
     background-color: blueviolet;
     margin-top: 90px;
     height: 100%;
-    display: flex;
+    display: grid;
     justify-content: center;
 }
 header {
@@ -28,11 +28,60 @@ header p {
 header .main_header {
     font-size: 31px;
 }
-
 .logo {
     background-image: url('../../images/brainteaser-logo.png');
     background-size: contain;
     height: 150px;
     background-repeat: no-repeat;
     background-position: center;
+    height: 160px;
+    width: 250px;
+}
+.board {
+    height: 180px;
+    width: 270px;
+    position: absolute;
+    right: 0;
+    background-color: #3d1617;
+    top: 71px;
+    border-radius: 0px 0px 0px 186px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+}
+.username {
+    color: beige;
+    font-size: 40px;
+    margin: 24px 0 5px 40px;
+    text-align: center;
+}
+.highScore {
+    color: burlywood;
+    font-size: 70px;
+    margin: 0;
+    text-align: center;
+}
+.score {
+    display: flex;
+    justify-content: center;
+    margin-left: 60px;
+}
+.pts {
+    color: burlywood;
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+}
+
+#quiz-container {
+    margin-top: 20px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#question-box {
+    margin-bottom: 15px;
+    font-weight: bold;
 }

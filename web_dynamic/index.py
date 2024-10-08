@@ -54,7 +54,6 @@ def quiz():
         resp = make_response(rendered_page)
         resp.set_cookie('X-Token', token, httponly=True, secure=True)
         return resp
-
     return redirect(url_for('home'))
 
 @app.route('/results/<string:username>', methods=['GET'], strict_slashes=False)

@@ -5,12 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrainTeaser_by_marouane</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='styles/index.css') }}/>
+    <script src="../static/scripts/quiz.js"></script>
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='styles/quiz.css') }}/>
 </head>
 <body>
     <header>
         <p class="main_header">BrainTeaser</p>
         <p class="secondary_header">by Marouane</p>
     </header>
+    <div>
+        <div class="logo"></div>
+        <div class="board">
+            <p class="username">{{ username }}</p>
+            <div class="score">
+                <p class="highScore">{{ highScore }}</p>
+                <p class="pts">Pts</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="start">
+        <label for="category">Choose a Category:</label>
+        <select id="category">
+            <option value="9">General Knowledge</option>
+            <option value="21">Sports</option>
+            <option value="18">Science: Computers</option>
+            <option value="23">History</option>
+        </select>
+
+        <button id="start-quiz">Start Quiz</button>
+    </div>
+
+    <div id="quiz-container" style="display:none;">
+        <div id="question-box"></div>
+        <div id="answer-box"></div>
+        <button id="next-question" style="display:none;">Next Question</button>
+    </div>
 </body>
 </html>
