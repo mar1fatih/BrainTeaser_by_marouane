@@ -2,6 +2,7 @@ $(document).ready(function () {
   const questionsUrl = 'https://opentdb.com/api.php?amount=5&category=';
   let questions = [];
   let currentQuestionIndex = 0;
+  let score = 0;
 
   $('#start-quiz').click(function () {
     let selectedCategory = $('#category').val();
