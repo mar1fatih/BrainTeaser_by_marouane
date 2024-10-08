@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """ Starts a Flash Web Application """
-from flask import Flask, render_template, abort, redirect, url_for
+from flask import Flask, render_template, abort, redirect, url_for, request
 from datetime import datetime
 import requests
+import base64
 
 
 app = Flask(__name__)
@@ -18,14 +19,14 @@ def home():
 @app.route('/login', methods=['POST'],strict_slashes=False)
 def login():
     """verify login"""
-    print('hello world')
-    email = request.form.get('email')  # Accessing email
-    password = request.form.get('password')  # Accessing password
-    
-    # Process the data (e.g., validate, store, etc.)
-    # For demonstration, we'll just print the values
-    print(f'Email: {email}, Password: {password}')
-    return redirect(url_for('/'))
+    email = request.form.get('email') 
+    password = request.form.get('password')
+    emailPass = email + ':' + password
+    bytlog = emailPass.encode('utf-8')
+    encodedbyt = base64.b64encode(bytlog)
+    encoded = encodedbyt.decode('utf-8')
+    print(f'data: {encoded}')
+    return redirect(url_for('/users/'))
 
 @app.route('/users/', methods=['GET'], strict_slashes=False)
 def quiz():
