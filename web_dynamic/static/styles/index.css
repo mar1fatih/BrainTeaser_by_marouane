@@ -51,4 +51,5 @@ header .main_header {
 }
 .logo {
     background-image: url('../../images/brainteaser-logo.png');
+    background-size: cover;
 }
