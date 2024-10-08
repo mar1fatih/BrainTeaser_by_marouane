@@ -1,7 +1,6 @@
 import { ObjectId } from 'mongodb';
 import dbClient from '../utils/db';
 import redisClient from '../utils/redis';
-import { query } from 'express';
 
 class PlayersController {
   static async saveScore(req, res) {
@@ -34,11 +33,9 @@ class PlayersController {
   }
 
   static async getLeaders(req, res) {
-    const query = {};
-    const options = { sort: { score: -1 }, limit: 10 };
-    const leaders = await dbClient.player.find(query, options).toArray();
+    const leaders = await dbClient.players.find().sort({ highScore: -1 }).limit(1);
     if (!leaders) {
-      res.status(400).json({error: 'No Leaders'});
+      res.status(400).json({ error: 'No Leaders' });
     }
     res.status(200).json({ leaders });
   }

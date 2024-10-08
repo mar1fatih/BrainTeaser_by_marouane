@@ -10,9 +10,10 @@ app = Flask(__name__)
 @app.route('/', strict_slashes=False)
 def home():
     """ main page """ 
-    leaders = requests.get('127.0.0.0:5000/leaders')
+    leaders = requests.get('http://localhost:5000/leaders')
     if leaders.status_code == 200:
-        return render_template('index.html', leaders=leaders['leaders'])
+        print(leaders.json()['leaders'])
+        return render_template('index.html', leaders=leaders.json()['leaders'])
     return render_template('index.html', leaders={})
 
 @app.route('/users/<string:username>', methods=['GET'], strict_slashes=False)
@@ -26,4 +27,4 @@ def quiz_results(username):
     return render_template('results.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5003')
+    app.run(host='0.0.0.0', port='5003', debug=True)
