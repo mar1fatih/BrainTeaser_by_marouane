@@ -4,7 +4,7 @@ html, body {
 }
 body {
     background-color: blueviolet;
-    margin-top: 75px;
+    margin-top: 90px;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -48,4 +48,7 @@ header .main_header {
     padding-left: 24px;
     flex-grow: 1;
     border-radius: 21px 0 0 21px;
+}
+.logo {
+    background-image: url(../images/brainteaser-logo.png);
 }
