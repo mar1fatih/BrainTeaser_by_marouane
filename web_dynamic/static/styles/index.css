@@ -50,5 +50,5 @@ header .main_header {
     border-radius: 21px 0 0 21px;
 }
 .logo {
-    background-image: url('../images/brainteaser-logo.png');
+    background-image: url('../../images/brainteaser-logo.png');
 }
