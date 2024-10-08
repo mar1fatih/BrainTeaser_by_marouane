@@ -54,10 +54,13 @@ class UsersController {
     if (!user) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
+    const player = await dbClient.players.findOne({ userId: _id });
+    if (!player) {
+      return res.status(401).json({ error: 'No player' });
+    }
     return res.status(200).json({
-      id: user._id,
       username: user.username,
-      email: user.email,
+      highScore: player.highScore,
     });
   }
 }
