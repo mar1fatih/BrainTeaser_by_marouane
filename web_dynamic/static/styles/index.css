@@ -48,6 +48,7 @@ header .main_header {
     padding-left: 24px;
     flex-grow: 1;
     border-radius: 21px 0 0 21px;
+    width: 300px;
 }
 .logo {
     background-image: url('../../images/brainteaser-logo.png');
