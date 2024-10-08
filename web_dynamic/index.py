@@ -27,7 +27,7 @@ def login():
     encoded = encodedbyt.decode('utf-8')
     
     url = 'http://localhost:5000/connect'
-    header = {'Authorization': encoded}
+    header = {'Authorization': 'Basic ' + encoded}
 
     res = requests.get(url, headers=header)
 
