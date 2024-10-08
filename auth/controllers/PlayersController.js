@@ -33,7 +33,7 @@ class PlayersController {
   }
 
   static async getLeaders(req, res) {
-    const leaders = await dbClient.players.find().sort({ highScore: -1 }).limit(1).toArray();
+    const leaders = await dbClient.players.find().sort({ highScore: -1 }).limit(10).toArray();
     if (!leaders) {
       res.status(400).json({ error: 'No Leaders' });
     }
