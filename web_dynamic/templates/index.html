@@ -3,15 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainTease Quiz (jQuery Version)</title>
+    <title>BrainTeaser_by_marouane</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='styles/index.css') }}/>
 </head>
 <body>
-    <div id="quiz-container">
-        <h2 id="question"></h2>
-        <ul id="answers"></ul>
-        <button id="next-btn">Next Question</button>
+    <header>
+        <p class="main_header">BrainTeaser</p>
+        <p class="secondary_header">by Marouane</p>
+    </header>
+    <div id="rule-container">
+        <ul>Rules:</ul>
+        <li>Time Limit:</li>
+        <ul>
+            <li>Each question must be answered within a specified time limit (e.g., 30 seconds per question). If the timer runs out, the question will be marked incorrect.</li>
+        </ul>
+        <li>Scoring System:</li>
+        <ul>
+            <li>Each correct answer awards a fixed number of points (e.g., 10 points per correct answer).</li>
+            <li>Incorrect answers give no points, and skipping a question also results in no points.</li>
+        </ul>
+        <li>Answer Submission:</li>
+        <ul>
+            <li>Once an answer is submitted, it cannot be changed. Choose your answers carefully!</li>
+            <li>If no answer is selected within the time limit, the question will be automatically skipped.</li>
+        </ul>
+        <li>No Backtracking:</li>
+        <ul>
+            <li>Users cannot go back to previous questions once they have moved to the next one.</li>
+        </ul>
+        <li>Leaderboard:</li>
+        <ul>
+            <li>A real-time leaderboard will display the top scorers based on total points accumulated across quizzes.</li>
+            <li>Scores are updated immediately after the quiz is completed.</li>
+        </ul>
+        <li>Multiple Attempts:</li>
+        <ul>
+            <li>Users can take quizzes multiple times, but only the highest score will be saved for the leaderboard.</li>
+        </ul>
+        <li>User Authentication Required:</li>
+        <ul>
+            <li>Only registered and logged-in users can participate in the quizzes and save their scores.</li>
+        </ul>
+    </div>
+    <div id="login-container">
+    </div>
+    <div id="leaderboard-container">
+        <ul>Leaders:</ul>
+        {% for leader in leaders %}
+        <li>{{ leader['username'] }}: {{ leader['highScore'] }} Pts</li>
+        {% endfor %}
     </div>
 </body>
 </html>
