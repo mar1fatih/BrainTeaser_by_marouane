@@ -14,7 +14,7 @@ class PlayersController {
       res.status(400).json({error: 'Missing score'});
     }
     const user = await dbClient.users.findOne({ _id: new ObjectId(userId) });
-    const player = await dbClient.players.findOne({ _id: new ObjectId(userId) });
+    const player = await dbClient.players.findOne({ userId });
     if (!player) {
       await dbClient.players.insertOne({
         userId,
@@ -23,7 +23,7 @@ class PlayersController {
       });
       return res.status(201).json({ highScore: score });
     }
-    if (player.highScore > score) {
+    if (player.highScore >= score) {
       return res.status(200).json({ highScore: player.highScore });
     }
     const filter = { _id: player._id };

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ Starts a Flash Web Application """
-from flask import Flask, render_template, abort, redirect, url_for, request
+from flask import Flask, render_template, abort, redirect, url_for, request, make_response
 from datetime import datetime
 import requests
 import base64
