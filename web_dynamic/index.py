@@ -25,8 +25,18 @@ def login():
     bytlog = emailPass.encode('utf-8')
     encodedbyt = base64.b64encode(bytlog)
     encoded = encodedbyt.decode('utf-8')
-    print(f'data: {encoded}')
-    return redirect(url_for('/users/'))
+    
+    url = 'http://localhost:5000/connect'
+    header = {'Authorization': encoded}
+
+    res = requests.get(url, headers=header)
+
+    if res.status_code == 200:
+        token = res.json()['token']
+        resp = make_response(redirect(url_for('quiz')))
+        resp.set_cookie('X-Token', token, httponly=True, secure=True)
+        return redirect(url_for('quiz'))
+    return redirect(url_for('home'))
 
 @app.route('/users/', methods=['GET'], strict_slashes=False)
 def quiz():
