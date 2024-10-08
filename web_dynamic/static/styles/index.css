@@ -56,3 +56,18 @@ header .main_header {
     background-repeat: no-repeat;
     background-position: center;
 }
+.welcome {
+    text-align: center;
+    font-size: 40px;
+    font-family: system-ui;
+    font-weight: bold;
+    color: white;
+    margin: -11px;
+}
+.welcome p {
+    text-align: center;
+    font-size: 40px;
+    font-family: system-ui;
+    font-weight: bold;
+    color: white;
+}
