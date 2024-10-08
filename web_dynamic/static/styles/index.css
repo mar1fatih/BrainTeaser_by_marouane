@@ -116,3 +116,10 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #45a049;
 }
+.create-button {
+    background-color: #008CBA;
+}
+
+.create-button:hover {
+    background-color: #007BB5;
+}
