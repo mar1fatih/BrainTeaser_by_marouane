@@ -35,13 +35,27 @@ def login():
         token = res.json()['token']
         resp = make_response(redirect(url_for('quiz')))
         resp.set_cookie('X-Token', token, httponly=True, secure=True)
-        return redirect(url_for('quiz'))
+        return resp
     return redirect(url_for('home'))
 
-@app.route('/users/', methods=['GET'], strict_slashes=False)
+@app.route('/quiz/', methods=['GET'], strict_slashes=False)
 def quiz():
     """main quiz page"""
-    return render_template('quiz.html')
+    token = request.cookies.get('X-Token')
+    url = 'http://localhost:5000/users/me'
+    header = {'X-Token': token}
+    res = requests.get(url, headers=header)
+    if res.status_code == 200:
+        username = res.json()['username']
+        highScore = res.json()['highScore']
+        rendered_page = render_template('quiz.html',
+                                        username=username,
+                                        highScore=highScore)
+        resp = make_response(rendered_page)
+        resp.set_cookie('X-Token', token, httponly=True, secure=True)
+        return resp
+
+    return redirect(url_for('home'))
 
 @app.route('/results/<string:username>', methods=['GET'], strict_slashes=False)
 def quiz_results(username):
