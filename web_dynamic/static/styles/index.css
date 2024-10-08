@@ -118,6 +118,14 @@ input[type="submit"]:hover {
 }
 .create-button {
     background-color: #008CBA;
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .create-button:hover {
