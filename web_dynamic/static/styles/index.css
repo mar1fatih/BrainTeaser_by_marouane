@@ -80,7 +80,7 @@ header .main_header {
 
 form {
     background-color: #ffffe7;
-    padding: 30px;
+    padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 300px;
@@ -88,14 +88,13 @@ form {
 
 label {
     display: block;
-    margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 20px;
     color: #333;
 }
 
 input[type="email"],
 input[type="password"] {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
