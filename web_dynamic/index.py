@@ -16,8 +16,18 @@ def home():
         return render_template('index.html', leaders=leaders.json()['leaders'])
     return render_template('index.html', leaders={})
 
-@app.route('/users/<string:username>', methods=['GET'], strict_slashes=False)
-def quiz(username):
+@app.route('/login', strict_slashes=False)
+def login():
+    """verify login"""
+    email = request.form.get('email')  # Accessing email
+    password = request.form.get('password')  # Accessing password
+    
+    # Process the data (e.g., validate, store, etc.)
+    # For demonstration, we'll just print the values
+    print(f'Email: {email}, Password: {password}')
+
+@app.route('/users/', methods=['GET'], strict_slashes=False)
+def quiz():
     """main quiz page"""
     return render_template('quiz.html')
 
