@@ -21,7 +21,8 @@ $(document).ready(function () {
 
   function showQuestion() {
     if (currentQuestionIndex >= questions.length) {
-      $('#question-box').html('Quiz Completed!');
+      congrats = `Quiz Completed!\nyou got ${score} points`
+      $('#question-box').html(`<p>${congrats}</p>`);
       $('#answer-box').html('');
       $('#next-question').hide();
       return;
@@ -40,6 +41,9 @@ $(document).ready(function () {
     $('#next-question').show();
 
     $('.answer-btn').click(function () {
+      $(this).css({
+        "background-color": "#008CBA",
+      });
       let selectedAnswer = $(this).text();
       if (selectedAnswer === question.correct_answer) {
         score += 10;
