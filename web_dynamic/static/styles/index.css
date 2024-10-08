@@ -71,8 +71,15 @@ header .main_header {
     font-weight: bold;
     color: white;
 }
+
+.input {
+    display: grid;
+    justify-content: center;
+    margin: 31px 0px 0px 0px;
+}
+
 form {
-    background-color: #ffffff;
+    background-color: #ffffe7;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
