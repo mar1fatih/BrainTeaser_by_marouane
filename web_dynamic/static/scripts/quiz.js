@@ -85,30 +85,29 @@ $(document).ready(function () {
     $('#next-question').show();
 
     $('.answer-btn').click(async function () {
+      $(".answer-btn").prop('disabled', true);
+      $(".answer-btn").each(function() {
+        $(this).removeClass("answer-btn").addClass("new-answer-btn");
+      });
       let selectedAnswer = $(this).text();
       if (selectedAnswer === question.correct_answer) {
         score += 10;
 	$(this).css({
           "background-color": "#008CBA",
         });
-        $(".answer-btn").each(function() {
-          $(this).removeClass("answer-btn").addClass("new-answer-btn");
-        });
 	currentQuestionIndex++;
 	await setTimeout(async function() {
 	  showQuestion();
-        }, 1000);
+        }, 1500);
       }else {
         $(this).css({
           "background-color": "#ff0000",
         });
-	$(".answer-btn").each(function() {
-          $(this).removeClass("answer-btn").addClass("new-answer-btn");
-        });
+	$(`button:contains("${question.correct_answer}")`).addClass('turntogreen');
         currentQuestionIndex++;
         await setTimeout(async function() {
 	  showQuestion();
-        }, 1000);
+        }, 1500);
       }
     });
   }
