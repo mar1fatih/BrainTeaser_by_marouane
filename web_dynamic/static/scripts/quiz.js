@@ -47,12 +47,14 @@ $(document).ready(function () {
       let selectedAnswer = $(this).text();
       if (selectedAnswer === question.correct_answer) {
         score += 10;
+	setTimeout(function() {
+	  showQuestion();
+        }, 1000);
       }
       currentQuestionIndex++;
+      setTimeout(function() {
+        showQuestion();
+      }, 1000);
     });
   }
-
-    $('#next-question').click(function () {
-      showQuestion();
-    });
 });

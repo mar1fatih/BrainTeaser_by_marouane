@@ -85,3 +85,7 @@ button {
     margin-bottom: 15px;
     font-weight: bold;
 }
+.logo_board {
+    display: flex;
+    justify-content: center;
+}
