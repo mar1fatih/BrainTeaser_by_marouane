@@ -84,8 +84,76 @@ button {
 #question-box {
     margin-bottom: 15px;
     font-weight: bold;
+    border: 4px solid black;
+    border-radius: 60px;
+    background-color: wheat;
+    font-size: 30px;
+    padding: 15px;
 }
 .logo_board {
     display: flex;
     justify-content: center;
+}
+.answer-btn {
+    border-radius: 60px;
+    width: 500px;
+    height: 80px;
+    border: 2px solid black;
+    font-size: 29px;
+}
+.new-answer-btn {
+    border-radius: 60px;
+    width: 500px;
+    height: 80px;
+    border: 2px solid black;
+    font-size: 29px;
+}
+#answer-box {
+    display: grid;
+    justify-content: center;
+}
+#start {
+    display: grid;
+    margin: 40px;
+    justify-content: center;
+}
+#start label {
+    font-size: 40px;
+}
+#category {
+    height: 50px;
+    font-size: 30px;
+    border-radius: 12px;
+    border: 1px solid black;
+}
+#start-quiz {
+    border-radius: 60px;
+    border: 2px solid black;
+    background-color: wheat;
+    font-size: 30px;
+}
+.yourpts {
+    margin-bottom: 15px;
+    font-weight: bold;
+    border: 4px solid black;
+    border-radius: 60px;
+    background-color: wheat;
+    font-size: 30px;
+    padding: 15px;
+}
+.return {
+    width: 150px;
+    justify-self: center;
+    font-size: 30px;
+    border-radius: 60px;
+    border: 2px solid black;
+    background-color: #45ff64;
+}
+.logout {
+    width: 150px;
+    justify-self: center;
+    font-size: 30px;
+    border-radius: 60px;
+    border: 2px solid black;
+    background-color: #f00;
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ Starts a Flash Web Application """
-from flask import Flask, render_template, abort, redirect, url_for, request, make_response
+from flask import Flask, render_template, abort, redirect, url_for, request, make_response, jsonify
 from datetime import datetime
 import requests
 import base64
@@ -34,7 +34,7 @@ def login():
     if res.status_code == 200:
         token = res.json()['token']
         resp = make_response(redirect(url_for('quiz')))
-        resp.set_cookie('X-Token', token, httponly=True, secure=True)
+        resp.set_cookie('X-Token', token, secure=True, samesite='None')
         return resp
     return redirect(url_for('home'))
 
@@ -52,14 +52,48 @@ def quiz():
                                         username=username,
                                         highScore=highScore)
         resp = make_response(rendered_page)
-        resp.set_cookie('X-Token', token, httponly=True, secure=True)
+        resp.set_cookie('X-Token', token)
         return resp
     return redirect(url_for('home'))
 
-@app.route('/results/<string:username>', methods=['GET'], strict_slashes=False)
-def quiz_results(username):
+@app.route('/results', methods=['POST'], strict_slashes=False)
+def quiz_results():
     """final results"""
-    return render_template('results.html')
+    token = request.cookies.get('X-Token')
+    score = request.get_json()
+    url = 'http://localhost:5000/players'
+
+    if not token or not score:
+        abort(400)
+
+    header = {
+                'Content-Type': 'application/json',
+                'X-Token': token
+                }
+
+    res = requests.post(url, headers=header, json=score)
+    if res.status_code == 201:
+        highScore = res.json()['highScore']
+        resp = {"highScore": "new {}".format(highScore)}
+        return jsonify(resp)
+    if res.status_code == 200:
+        highScore = res.json()['highScore']
+        resp = {"highScore": "still {}".format(highScore)}
+        return jsonify(resp)
+    abort(400)
+
+@app.route('/disconnect', methods=['GET'], strict_slashes=False)
+def final_result():
+    """final results"""
+    token = request.headers.get('X-Token')
+    print(token)
+    header = { 'X-Token': token }
+    res = requests.post('http://localhost:5000/disconnect', headers=header)
+    if res.status_code == 200:
+        return "Success!", 200
+    else:
+        return "Failed!", 400
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5003', debug=True)

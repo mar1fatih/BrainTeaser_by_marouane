@@ -10,8 +10,8 @@ class PlayersController {
       return res.status(401).json({ error: 'Unauthorized' });
     }
     const { score } = req.body;//getting the score from the body
-    if (!score) {
-      res.status(400).json({error: 'Missing score'});
+    if (score == null) {
+      return res.status(400).json({error: 'Missing score'});
     }
     const user = await dbClient.users.findOne({ _id: new ObjectId(userId) });
     const player = await dbClient.players.findOne({ userId });
