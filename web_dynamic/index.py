@@ -19,7 +19,7 @@ def home():
 @app.route('/login', methods=['POST'],strict_slashes=False)
 def login():
     """verify login"""
-    email = request.form.get('email') 
+    email = request.form.get('email')
     password = request.form.get('password')
     emailPass = email + ':' + password
     bytlog = emailPass.encode('utf-8')
@@ -37,6 +37,25 @@ def login():
         resp.set_cookie('X-Token', token, secure=True, samesite='None')
         return resp
     return redirect(url_for('home'))
+
+@app.route('/create', methods=['POST'], strict_slashes=False)
+def create():
+    """create new account"""
+    username = request.form.get('username')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    url = 'http://localhost:5000/users'
+    header = {'Content-Type': 'application/json'}
+    body = {
+            'username': username,
+            'email': email,
+            'password': password
+            }
+    res = requests.post(url, headers=header, json=body)
+    if res.status_code == 201:
+        resp = make_response(redirect(url_for('home')))
+        resp.set_cookie('create', 'created successfully')
+        return resp
 
 @app.route('/quiz/', methods=['GET'], strict_slashes=False)
 def quiz():
