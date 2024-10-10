@@ -1,0 +1,123 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: blueviolet;
+    margin-top: 90px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+header {
+    background-color: #8500ba;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+}
+header p {
+    margin: 3px;
+}
+header .main_header {
+    font-size: 31px;
+}
+#rule-container {
+    width: 300px;
+    background-color: white;
+    border-radius: 0 21px 21px 0px;
+    flex-grow: 1;
+    height: fit-content;
+    margin-right: 20px;
+    height: 637px;
+}
+#create-container {
+    width: 901px;
+    flex-grow: 2;
+    background-color: #8821b8;
+    border-radius: 100px;
+    height: 800px;
+}
+#leaderboard-container {
+    margin-left: 20px;
+    background-color: white;
+    padding-left: 24px;
+    flex-grow: 1;
+    border-radius: 21px 0 0 21px;
+    width: 300px;
+    height: 637px;
+}
+.logo {
+    background-image: url('../../images/brainteaser-logo.png');
+    background-size: contain;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.welcome {
+    text-align: center;
+    font-size: 40px;
+    font-family: system-ui;
+    font-weight: bold;
+    color: white;
+    margin: -11px;
+}
+.welcome p {
+    text-align: center;
+    font-size: 40px;
+    font-family: system-ui;
+    font-weight: bold;
+    color: white;
+}
+
+.input {
+    display: grid;
+    justify-content: center;
+    margin: 31px 0px 0px 0px;
+}
+
+form {
+    background-color: #ffffe7;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+label {
+    display: block;
+    font-size: 20px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}

@@ -16,6 +16,14 @@ def home():
         return render_template('index.html', leaders=leaders.json()['leaders'])
     return render_template('index.html', leaders={})
 
+@app.route('/create-account', strict_slashes=False)
+def create_account():
+    """ create account page"""
+    leaders = requests.get('http://localhost:5000/leaders')
+    if leaders.status_code == 200:
+        return render_template('create.html', leaders=leaders.json()['leaders'])
+    return render_template('create.html', leaders={})
+
 @app.route('/login', methods=['POST'],strict_slashes=False)
 def login():
     """verify login"""
@@ -56,6 +64,9 @@ def create():
         resp = make_response(redirect(url_for('home')))
         resp.set_cookie('create', 'created successfully')
         return resp
+    resp = make_response(redirect(url_for('home')))
+    resp.set_cookie('error', 'created failed')
+    return resp
 
 @app.route('/quiz/', methods=['GET'], strict_slashes=False)
 def quiz():
