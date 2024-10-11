@@ -30,12 +30,13 @@ header .main_header {
 }
 #rule-container {
     width: 300px;
-    background-color: white;
+    background-color: #fad2ff;
     border-radius: 0 21px 21px 0px;
     flex-grow: 1;
     height: fit-content;
     margin-right: 20px;
-    height: 637px;
+    color: teal;
+    font-size: 17px;
 }
 #create-container {
     width: 901px;
@@ -46,12 +47,11 @@ header .main_header {
 }
 #leaderboard-container {
     margin-left: 20px;
-    background-color: white;
-    padding-left: 24px;
+    background-color: #fad2ff;
+    padding-left: 58px;
     flex-grow: 1;
     border-radius: 21px 0 0 21px;
     width: 300px;
-    height: 637px;
 }
 .logo {
     background-image: url('../../images/brainteaser-logo.png');
@@ -120,4 +120,21 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #45a049;
+}
+#result {
+    margin: 0;
+    font-size: 21px;
+    color: red;
+}
+.rules {
+    text-align: center;
+    font-size: 50px;
+    margin: 15px 0px 10px -45px;
+    color: #d900ff;
+}
+.leaders {
+    list-style-image: url('../../images/star.png');
+    padding-left: 0px;
+    font-size: 30px;
+    color: teal;
 }

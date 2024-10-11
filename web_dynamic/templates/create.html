@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrainTeaser_by_marouane</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../static/scripts/create.js"></script>
     <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='styles/create.css') }}/>
 </head>
 <body>
@@ -13,7 +14,7 @@
         <p class="secondary_header">by Marouane</p>
     </header>
     <div id="rule-container">
-        <ul>Rules:</ul>
+        <ul class="rules" >Rules</ul>
         <li>Scoring System:</li>
         <ul>
             <li>Each correct answer awards a fixed number of points (e.g., 10 points per correct answer).</li>
@@ -47,13 +48,14 @@
         </div>
         <div class="logo"></div>
         <div class="input">
-            <form action="/create" method="POST">
+            <form id="create_form" action="/create" method="POST">
+		<p id="result"></p>
                 <label for="username">Username:</label><br>
                 <input type="text" id="username" name="username" required placeholder="Enter your username"><br><br>
 
                 <label for="email">Email:</label><br>
                 <input type="email" id="email" name="email" required placeholder="Enter your email"><br><br>
-        
+
                 <label for="password">Password:</label><br>
                 <input type="password" id="password" name="password" required placeholder="Enter your password"><br><br>
         
@@ -62,9 +64,9 @@
         </div>
     </div>
     <div id="leaderboard-container">
-        <ul>Leaders:</ul>
+        <ul class="rules" >Leaders</ul>
         {% for leader in leaders %}
-        <li>{{ leader['username'] }}: {{ leader['highScore'] }} Pts</li>
+        <li class="leaders" >{{ leader['username'] }}: {{ leader['highScore'] }} Pts</li>
         {% endfor %}
     </div>
 </body>

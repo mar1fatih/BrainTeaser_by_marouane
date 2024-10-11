@@ -13,20 +13,15 @@
         <p class="secondary_header">by Marouane</p>
     </header>
     <div id="rule-container">
-        <ul>Rules:</ul>
-        <li>Time Limit:</li>
-        <ul>
-            <li>Each question must be answered within a specified time limit (e.g., 30 seconds per question). If the timer runs out, the question will be marked incorrect.</li>
-        </ul>
+        <ul class="rules" >Rules</ul>
         <li>Scoring System:</li>
         <ul>
             <li>Each correct answer awards a fixed number of points (e.g., 10 points per correct answer).</li>
-            <li>Incorrect answers give no points, and skipping a question also results in no points.</li>
+            <li>Incorrect answers give no points</li>
         </ul>
         <li>Answer Submission:</li>
         <ul>
             <li>Once an answer is submitted, it cannot be changed. Choose your answers carefully!</li>
-            <li>If no answer is selected within the time limit, the question will be automatically skipped.</li>
         </ul>
         <li>No Backtracking:</li>
         <ul>
@@ -53,6 +48,7 @@
         <div class="logo"></div>
         <div class="input">
             <form action="/login" method="POST">
+		<p id="result"></p>
                 <label for="email">Email:</label><br>
                 <input type="email" id="email" name="email" required placeholder="Enter your email"><br><br>
         
@@ -65,11 +61,17 @@
         </div>
     </div>
     <div id="leaderboard-container">
-        <ul>Leaders:</ul>
+        <ul class="rules" >Leaders</ul>
         {% for leader in leaders %}
-        <li>{{ leader['username'] }}: {{ leader['highScore'] }} Pts</li>
+        <li class="leaders" >{{ leader['username'] }}: {{ leader['highScore'] }} Pts</li>
         {% endfor %}
     </div>
 </body>
+    <script>
+	const result = '{{ err }}';
+        if (result) {
+	  $('#result').text(result);
+	}
+    </script>
 </html>
 

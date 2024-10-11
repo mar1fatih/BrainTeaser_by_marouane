@@ -6,7 +6,6 @@ import redisClient from '../utils/redis';
 class UsersController {
   static async postNew(req, res) {
     const { username, email, password } = req.body;
-
     if (!username) {
       return res.status(400).json({ error: 'Missing username'});
     }
@@ -56,7 +55,10 @@ class UsersController {
     }
     const player = await dbClient.players.findOne({ userId: _id });
     if (!player) {
-      return res.status(401).json({ error: 'No player' });
+      return res.status(200).json({
+        username: user.username,
+        highScore: 0,
+      });
     }
     return res.status(200).json({
       username: user.username,

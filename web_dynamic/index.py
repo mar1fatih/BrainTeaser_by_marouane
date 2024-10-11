@@ -27,6 +27,7 @@ def create_account():
 @app.route('/login', methods=['POST'],strict_slashes=False)
 def login():
     """verify login"""
+    err = 'The email or password is incorrect'
     email = request.form.get('email')
     password = request.form.get('password')
     emailPass = email + ':' + password
@@ -44,7 +45,10 @@ def login():
         resp = make_response(redirect(url_for('quiz')))
         resp.set_cookie('X-Token', token, secure=True, samesite='None')
         return resp
-    return redirect(url_for('home'))
+    leaders = requests.get('http://localhost:5000/leaders')
+    if leaders.status_code == 200:
+        return render_template('index.html', leaders=leaders.json()['leaders'], err=err)
+    return render_template('index.html', leaders={}, err=err)
 
 @app.route('/create', methods=['POST'], strict_slashes=False)
 def create():
@@ -65,16 +69,17 @@ def create():
         resp.set_cookie('create', 'created successfully')
         return resp
     resp = make_response(redirect(url_for('home')))
-    resp.set_cookie('error', 'created failed')
     return resp
 
 @app.route('/quiz/', methods=['GET'], strict_slashes=False)
 def quiz():
     """main quiz page"""
     token = request.cookies.get('X-Token')
+    print(token)
     url = 'http://localhost:5000/users/me'
     header = {'X-Token': token}
     res = requests.get(url, headers=header)
+    print('im ' + res.json()['username'], res.status_code)
     if res.status_code == 200:
         username = res.json()['username']
         highScore = res.json()['highScore']
