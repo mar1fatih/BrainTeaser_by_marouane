@@ -37,7 +37,7 @@ To install BrainTeaser, follow these steps:
 	npm run start-server
 
 6. Start the application:
-        ```sh
+	```sh
 	python3 -m web_dynamic.index
 
 
