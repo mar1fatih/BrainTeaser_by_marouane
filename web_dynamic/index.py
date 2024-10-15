@@ -1,30 +1,35 @@
 #!/usr/bin/python3
 """ Starts a Flash Web Application """
-from flask import Flask, render_template, abort, redirect, url_for, request, make_response, jsonify
-from datetime import datetime
 import requests
 import base64
+from datetime import datetime
+from flask import Flask, render_template, abort
+from flask import redirect, url_for, request, make_response, jsonify
 
 
 app = Flask(__name__)
 
+
 @app.route('/', strict_slashes=False)
 def home():
-    """ main page """ 
+    """ main page """
     leaders = requests.get('http://localhost:5000/leaders')
     if leaders.status_code == 200:
         return render_template('index.html', leaders=leaders.json()['leaders'])
     return render_template('index.html', leaders={})
+
 
 @app.route('/create-account', strict_slashes=False)
 def create_account():
     """ create account page"""
     leaders = requests.get('http://localhost:5000/leaders')
     if leaders.status_code == 200:
-        return render_template('create.html', leaders=leaders.json()['leaders'])
+        return render_template('create.html',
+                               leaders=leaders.json()['leaders'])
     return render_template('create.html', leaders={})
 
-@app.route('/login', methods=['POST'],strict_slashes=False)
+
+@app.route('/login', methods=['POST'], strict_slashes=False)
 def login():
     """verify login"""
     err = 'The email or password is incorrect'
@@ -34,7 +39,7 @@ def login():
     bytlog = emailPass.encode('utf-8')
     encodedbyt = base64.b64encode(bytlog)
     encoded = encodedbyt.decode('utf-8')
-    
+
     url = 'http://localhost:5000/connect'
     header = {'Authorization': 'Basic ' + encoded}
 
@@ -47,8 +52,10 @@ def login():
         return resp
     leaders = requests.get('http://localhost:5000/leaders')
     if leaders.status_code == 200:
-        return render_template('index.html', leaders=leaders.json()['leaders'], err=err)
+        return render_template('index.html',
+                               leaders=leaders.json()['leaders'], err=err)
     return render_template('index.html', leaders={}, err=err)
+
 
 @app.route('/create', methods=['POST'], strict_slashes=False)
 def create():
@@ -71,15 +78,14 @@ def create():
     resp = make_response(redirect(url_for('home')))
     return resp
 
+
 @app.route('/quiz/', methods=['GET'], strict_slashes=False)
 def quiz():
     """main quiz page"""
     token = request.cookies.get('X-Token')
-    print(token)
     url = 'http://localhost:5000/users/me'
     header = {'X-Token': token}
     res = requests.get(url, headers=header)
-    print('im ' + res.json()['username'], res.status_code)
     if res.status_code == 200:
         username = res.json()['username']
         highScore = res.json()['highScore']
@@ -90,6 +96,7 @@ def quiz():
         resp.set_cookie('X-Token', token)
         return resp
     return redirect(url_for('home'))
+
 
 @app.route('/results', methods=['POST'], strict_slashes=False)
 def quiz_results():
@@ -117,12 +124,12 @@ def quiz_results():
         return jsonify(resp)
     abort(400)
 
+
 @app.route('/disconnect', methods=['GET'], strict_slashes=False)
 def final_result():
     """final results"""
     token = request.headers.get('X-Token')
-    print(token)
-    header = { 'X-Token': token }
+    header = {'X-Token': token}
     res = requests.post('http://localhost:5000/disconnect', headers=header)
     if res.status_code == 200:
         return "Success!", 200

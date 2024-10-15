@@ -27,6 +27,7 @@ header p {
 }
 header .main_header {
     font-size: 31px;
+    cursor: pointer;
 }
 #rule-container {
     width: 300px;

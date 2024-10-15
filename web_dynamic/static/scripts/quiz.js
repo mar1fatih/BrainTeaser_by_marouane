@@ -10,6 +10,17 @@ $(document).ready(function () {
     }
     return null;
   }
+
+  $('.main_header').click(async function () {
+    const cookie = getCookie('X-Token');
+    const res = await fetch('http://localhost:5000/disconnect', {
+      method: 'GET',
+      headers: { 'X-Token': cookie },
+    });
+    if (res.ok) {
+      window.location.href = '/';
+    }
+  });
   
   const result = async (url, header, body) => {                //send the token with the score to node server to save it
     const res = await fetch(url, {

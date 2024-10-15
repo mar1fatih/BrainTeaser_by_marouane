@@ -26,4 +26,7 @@ $(document).ready(function() {
       }
     });
   });
+  $('.main_header').click(function() {
+            window.location.href = '/';
+        });
 });
