@@ -38,7 +38,7 @@ To install BrainTeaser, follow these steps:
 
 6. Start the application:
         ```sh
-        python3 -m web_dynamic.index
+	python3 -m web_dynamic.index
 
 
 You're All Set:
